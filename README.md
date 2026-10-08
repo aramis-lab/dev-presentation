@@ -1,2 +1,3 @@
-# dev-presentation
-A template for dev presentations.
+# Template for developer presentations
+
+To build HTML slides from Markdown files.
