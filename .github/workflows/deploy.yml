@@ -1,0 +1,51 @@
+name: Deploy pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      # Install Node.js
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm ci   # preferred to 'npm install'
+
+      - name: Build
+        run: npm run build -- --base /${{github.event.repository.name}}/
+        # In commands like <script type="module" src="/assets/index-abc123.js"></script>,
+        # a URL beginning with "/"" means “start from the domain root”.
+        # So, the browser would request https://aramislab.github.io/assets/index-abc123.js,
+        # but the site is hosted below https://aramislab.github.io/<repo>,
+        # so the actual asset is at https://aramislab.github.io/<repo>/assets/index-abc123.js.
+        # --base /<repo> will change the asset URL to /<repo>/assets/index-abc123.js.
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
