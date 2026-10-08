@@ -4,6 +4,8 @@ To build HTML slides from Markdown files, like [this one](https://www.aramislab.
 
 This repo was generated with the tool [Slidev](https://sli.dev/).
 
+To create your own presentation, [create a GitHub repository in the ARAMIS Lab organization](https://github.com/organizations/aramis-lab/repositories/new), select this repository as a template, and follow these instructions:
+
 ## Installation
 
 ### Install Node.js
