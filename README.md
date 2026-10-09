@@ -46,6 +46,9 @@ Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev at the [documentation](https://sli.dev/).
 
+> [!NOTE]
+> You can modify the theme in the header of the markdown file. Have a look at the popular themes [here](https://docs-legacy.sli.dev/themes/gallery).
+
 ## To deploy your presentation online
 
 `npm run dev` enables to open your presentation locally. If you want to deploy the presentation online, for example to share it, do the following steps:
